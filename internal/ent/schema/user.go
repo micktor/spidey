@@ -17,6 +17,8 @@ func (User) Fields() []ent.Field {
 			Positive(),
 		field.String("name").
 			Default("unknown"),
+		field.String("testfield").
+			Default("unknown"),
 	}
 }
 

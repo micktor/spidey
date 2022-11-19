@@ -25,5 +25,5 @@ func setupRoutes(app *fiber.App, a *applicationConfig) {
 	v1 := api.Group("/v1")
 
 	spideyRoutes := v1.Group("/spidey")
-	spideyRoutes.Post("/new", a.spideyHandler.CreateSpidey)
+	spideyRoutes.Get("/get", a.spideyHandler.GetSpidey)
 }

@@ -20,14 +20,14 @@ type SpideyHandler struct {
 	spideyService internal.SpideyService
 }
 
-func (t SpideyHandler) CreateSpidey(c *fiber.Ctx) error {
+func (t SpideyHandler) GetSpidey(c *fiber.Ctx) error {
 	request := new(dto.SpideyRequest)
-	if err := c.BodyParser(request); err != nil {
-		c.SendStatus(fiber.StatusUnprocessableEntity)
-		return nil
-	}
+	//if err := c.BodyParser(request); err != nil {
+	//	c.SendStatus(fiber.StatusUnprocessableEntity)
+	//	return nil
+	//}
 
-	resp, err := t.spideyService.Test(*request)
+	resp, err := t.spideyService.Get(c.Context(), *request)
 	if err != nil {
 		c.SendStatus(fiber.StatusBadRequest)
 		return nil

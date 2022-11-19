@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"github.com/micktor/spidey/internal/dto"
 	"github.com/micktor/spidey/internal/ent"
 )
 
@@ -15,7 +16,14 @@ func NewSpideyRepository(db *ent.Client) *SpideyRepository {
 	}
 }
 
-func (p SpideyRepository) GetByID(ctx context.Context, id int) error {
-	_, err := p.db.User.Get(ctx, id)
-	return err
+func (p SpideyRepository) GetByID(ctx context.Context, id int) (dto.SpideyResponse, error) {
+	r, err := p.db.User.Get(ctx, id)
+
+	return toOurStruct(*r), err
+}
+
+func toOurStruct(user ent.User) dto.SpideyResponse {
+	return dto.SpideyResponse{
+		Test: "123",
+	}
 }

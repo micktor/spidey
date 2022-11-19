@@ -54,6 +54,20 @@ func (uu *UserUpdate) SetNillableName(s *string) *UserUpdate {
 	return uu
 }
 
+// SetTestfield sets the "testfield" field.
+func (uu *UserUpdate) SetTestfield(s string) *UserUpdate {
+	uu.mutation.SetTestfield(s)
+	return uu
+}
+
+// SetNillableTestfield sets the "testfield" field if the given value is not nil.
+func (uu *UserUpdate) SetNillableTestfield(s *string) *UserUpdate {
+	if s != nil {
+		uu.SetTestfield(*s)
+	}
+	return uu
+}
+
 // Mutation returns the UserMutation object of the builder.
 func (uu *UserUpdate) Mutation() *UserMutation {
 	return uu.mutation
@@ -156,6 +170,9 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	if value, ok := uu.mutation.Name(); ok {
 		_spec.SetField(user.FieldName, field.TypeString, value)
 	}
+	if value, ok := uu.mutation.Testfield(); ok {
+		_spec.SetField(user.FieldTestfield, field.TypeString, value)
+	}
 	if n, err = sqlgraph.UpdateNodes(ctx, uu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{user.Label}
@@ -198,6 +215,20 @@ func (uuo *UserUpdateOne) SetName(s string) *UserUpdateOne {
 func (uuo *UserUpdateOne) SetNillableName(s *string) *UserUpdateOne {
 	if s != nil {
 		uuo.SetName(*s)
+	}
+	return uuo
+}
+
+// SetTestfield sets the "testfield" field.
+func (uuo *UserUpdateOne) SetTestfield(s string) *UserUpdateOne {
+	uuo.mutation.SetTestfield(s)
+	return uuo
+}
+
+// SetNillableTestfield sets the "testfield" field if the given value is not nil.
+func (uuo *UserUpdateOne) SetNillableTestfield(s *string) *UserUpdateOne {
+	if s != nil {
+		uuo.SetTestfield(*s)
 	}
 	return uuo
 }
@@ -333,6 +364,9 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (_node *User, err error) 
 	}
 	if value, ok := uuo.mutation.Name(); ok {
 		_spec.SetField(user.FieldName, field.TypeString, value)
+	}
+	if value, ok := uuo.mutation.Testfield(); ok {
+		_spec.SetField(user.FieldTestfield, field.TypeString, value)
 	}
 	_node = &User{config: uuo.config}
 	_spec.Assign = _node.assignValues

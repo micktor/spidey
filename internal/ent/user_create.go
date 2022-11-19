@@ -39,6 +39,20 @@ func (uc *UserCreate) SetNillableName(s *string) *UserCreate {
 	return uc
 }
 
+// SetTestfield sets the "testfield" field.
+func (uc *UserCreate) SetTestfield(s string) *UserCreate {
+	uc.mutation.SetTestfield(s)
+	return uc
+}
+
+// SetNillableTestfield sets the "testfield" field if the given value is not nil.
+func (uc *UserCreate) SetNillableTestfield(s *string) *UserCreate {
+	if s != nil {
+		uc.SetTestfield(*s)
+	}
+	return uc
+}
+
 // Mutation returns the UserMutation object of the builder.
 func (uc *UserCreate) Mutation() *UserMutation {
 	return uc.mutation
@@ -120,6 +134,10 @@ func (uc *UserCreate) defaults() {
 		v := user.DefaultName
 		uc.mutation.SetName(v)
 	}
+	if _, ok := uc.mutation.Testfield(); !ok {
+		v := user.DefaultTestfield
+		uc.mutation.SetTestfield(v)
+	}
 }
 
 // check runs all checks and user-defined validators on the builder.
@@ -134,6 +152,9 @@ func (uc *UserCreate) check() error {
 	}
 	if _, ok := uc.mutation.Name(); !ok {
 		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "User.name"`)}
+	}
+	if _, ok := uc.mutation.Testfield(); !ok {
+		return &ValidationError{Name: "testfield", err: errors.New(`ent: missing required field "User.testfield"`)}
 	}
 	return nil
 }
@@ -169,6 +190,10 @@ func (uc *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 	if value, ok := uc.mutation.Name(); ok {
 		_spec.SetField(user.FieldName, field.TypeString, value)
 		_node.Name = value
+	}
+	if value, ok := uc.mutation.Testfield(); ok {
+		_spec.SetField(user.FieldTestfield, field.TypeString, value)
+		_node.Testfield = value
 	}
 	return _node, _spec
 }

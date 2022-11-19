@@ -11,6 +11,8 @@ const (
 	FieldAge = "age"
 	// FieldName holds the string denoting the name field in the database.
 	FieldName = "name"
+	// FieldTestfield holds the string denoting the testfield field in the database.
+	FieldTestfield = "testfield"
 	// Table holds the table name of the user in the database.
 	Table = "users"
 )
@@ -20,6 +22,7 @@ var Columns = []string{
 	FieldID,
 	FieldAge,
 	FieldName,
+	FieldTestfield,
 }
 
 // ValidColumn reports if the column name is valid (part of the table columns).
@@ -37,4 +40,6 @@ var (
 	AgeValidator func(int) error
 	// DefaultName holds the default value on creation for the "name" field.
 	DefaultName string
+	// DefaultTestfield holds the default value on creation for the "testfield" field.
+	DefaultTestfield string
 )

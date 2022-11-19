@@ -92,6 +92,13 @@ func Name(v string) predicate.User {
 	})
 }
 
+// Testfield applies equality check predicate on the "testfield" field. It's identical to TestfieldEQ.
+func Testfield(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldTestfield), v))
+	})
+}
+
 // AgeEQ applies the EQ predicate on the "age" field.
 func AgeEQ(v int) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
@@ -252,6 +259,105 @@ func NameEqualFold(v string) predicate.User {
 func NameContainsFold(v string) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.ContainsFold(s.C(FieldName), v))
+	})
+}
+
+// TestfieldEQ applies the EQ predicate on the "testfield" field.
+func TestfieldEQ(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldNEQ applies the NEQ predicate on the "testfield" field.
+func TestfieldNEQ(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldIn applies the In predicate on the "testfield" field.
+func TestfieldIn(vs ...string) predicate.User {
+	v := make([]any, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.In(s.C(FieldTestfield), v...))
+	})
+}
+
+// TestfieldNotIn applies the NotIn predicate on the "testfield" field.
+func TestfieldNotIn(vs ...string) predicate.User {
+	v := make([]any, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.NotIn(s.C(FieldTestfield), v...))
+	})
+}
+
+// TestfieldGT applies the GT predicate on the "testfield" field.
+func TestfieldGT(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldGTE applies the GTE predicate on the "testfield" field.
+func TestfieldGTE(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldLT applies the LT predicate on the "testfield" field.
+func TestfieldLT(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldLTE applies the LTE predicate on the "testfield" field.
+func TestfieldLTE(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldContains applies the Contains predicate on the "testfield" field.
+func TestfieldContains(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.Contains(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldHasPrefix applies the HasPrefix predicate on the "testfield" field.
+func TestfieldHasPrefix(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.HasPrefix(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldHasSuffix applies the HasSuffix predicate on the "testfield" field.
+func TestfieldHasSuffix(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.HasSuffix(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldEqualFold applies the EqualFold predicate on the "testfield" field.
+func TestfieldEqualFold(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.EqualFold(s.C(FieldTestfield), v))
+	})
+}
+
+// TestfieldContainsFold applies the ContainsFold predicate on the "testfield" field.
+func TestfieldContainsFold(v string) predicate.User {
+	return predicate.User(func(s *sql.Selector) {
+		s.Where(sql.ContainsFold(s.C(FieldTestfield), v))
 	})
 }
 
