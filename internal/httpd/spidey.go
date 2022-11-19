@@ -23,7 +23,7 @@ type SpideyHandler struct {
 func (t SpideyHandler) CreateSpidey(c *fiber.Ctx) error {
 	request := new(dto.SpideyRequest)
 	if err := c.BodyParser(request); err != nil {
-		c.SendStatus(fiber.StatusServiceUnavailable)
+		c.SendStatus(fiber.StatusUnprocessableEntity)
 		return nil
 	}
 
