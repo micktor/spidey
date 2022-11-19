@@ -3,6 +3,7 @@ package httpd
 import (
 	"github.com/micktor/spidey/internal"
 	"github.com/micktor/spidey/internal/config"
+	"github.com/micktor/spidey/internal/ent"
 	"github.com/micktor/spidey/internal/repository"
 	"github.com/micktor/spidey/internal/service"
 )

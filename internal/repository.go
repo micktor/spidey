@@ -1,5 +1,7 @@
 package internal
 
+import "context"
+
 type SpideyRepository interface {
-	Create() error
+	GetByID(ctx context.Context, id int) error
 }
