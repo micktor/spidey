@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// NewSpideyHandler returns a configured PaymentMethodHandler handler.
+// NewSpideyHandler returns a configured SpideyHandler handler.
 func NewSpideyHandler(applicationConfig *applicationConfig) *SpideyHandler {
 	return &SpideyHandler{
 		spideyService: applicationConfig.spideyService,
